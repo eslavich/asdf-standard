@@ -3,5 +3,4 @@ sphinx_bootstrap_theme
 sphinx-asdf
 jsonschema
 pyyaml
-six
 mistune
