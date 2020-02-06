@@ -21,11 +21,6 @@ from common import (
 
 
 @pytest.fixture(scope="session")
-def version_maps():
-    return [load_yaml(p) for p in VERSION_MAP_PATHS]
-
-
-@pytest.fixture(scope="session")
 def schemas():
     return [load_yaml(p) for p in list_schema_paths(SCHEMAS_PATH)]
 
@@ -33,15 +28,6 @@ def schemas():
 @pytest.fixture(scope="session")
 def latest_schemas():
     return [load_yaml(p) for p in list_latest_schema_paths(SCHEMAS_PATH)]
-
-
-@pytest.fixture(scope="session")
-def schema_ids(schemas):
-    result = set()
-    for schema in schemas:
-        if "id" in schema:
-            result.add(schema["id"])
-    return result
 
 
 @pytest.fixture(scope="session")
@@ -63,14 +49,6 @@ def latest_schema_tags(latest_schemas):
             for elem in schema["anyOf"]:
                 if "tag" in elem:
                     result.add(elem["tag"])
-    return result
-
-
-@pytest.fixture(scope="session")
-def schema_id_bases(schema_ids):
-    result = set()
-    for schema_id in schema_ids:
-        result.add(split_id(schema_id)[0])
     return result
 
 
@@ -107,19 +85,6 @@ def id_to_schema(schemas):
                 result[schema["id"]] = []
             result[schema["id"]].append(schema)
     return result
-
-
-@pytest.fixture(scope="session")
-def id_to_version_maps():
-    result = {}
-    for path in VERSION_MAP_PATHS:
-        vm = load_yaml(path)
-        for tag_base, tag_version in vm["tags"].items():
-            tag = f"{tag_base}-{tag_version}"
-            schema_id = tag_to_id(tag)
-            if schema_id not in result:
-                result[schema_id] = []
-            result[schema_id].append(path.name)
 
 
 @pytest.fixture(scope="session")

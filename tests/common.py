@@ -16,8 +16,9 @@ VALID_FILE_FORMAT_VERSIONS = {"1.0.0"}
 
 VALID_SCHEMA_FILENAME_RE = re.compile(r"[a-z0-9_]+-[0-9]+\.[0-9]+\.[0-9]+\.yaml")
 
-DEPRECATED_ID_BASES = {"http://stsci.edu/schemas/asdf/transform/domain"}
-DEPRECATED_TAG_BASES = {"tag:stsci.edu:asdf/transform/domain"}
+DEPRECATED_NAMES = {"transform/domain"}
+DEPRECATED_ID_BASES = {f"http://stsci.edu/schemas/asdf/{name}" for name in DEPRECATED_NAMES}
+DEPRECATED_TAG_BASES = {f"tag:stsci.edu:asdf/{name}" for name in DEPRECATED_NAMES}
 
 METASCHEMA_ID = "http://stsci.edu/schemas/yaml-schema/draft-01"
 
