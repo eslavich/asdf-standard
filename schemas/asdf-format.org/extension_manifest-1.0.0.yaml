@@ -1,0 +1,53 @@
+%YAML 1.1
+---
+$schema: http://stsci.edu/schemas/yaml-schema/draft-01
+id: asdf://asdf-format.org/schemas/core/extension_manifest-1.0.0
+title: ASDF extension manifest (experimental)
+description: >
+  Manifest of features associated with an extension to the ASDF Standard.
+  This schema is experimental and is not currently included in any
+  official ASDF Standard version.
+
+type: object
+properties:
+  id:
+    description: >
+      The extension's identifying URI.
+    type: string
+  title:
+    description: >
+      Short description of the extension.
+    type: string
+  description:
+    description: >
+      Long description of the extension.
+    type: string
+  tags:
+    description: >
+      Tags supported by this extension.
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          description: >
+            The tag's identifying URI.
+          type: string
+        schema:
+          description: >
+            The URI of the schema that should be used to validate
+            objects with this tag.
+          type: string
+        title:
+          description: >
+            Short description of the tag.
+          type: string
+        description:
+          description: >
+            Long description of the tag.
+          type: string
+      required: [id]
+
+required: [id]
+additionalProperties: false
+...
